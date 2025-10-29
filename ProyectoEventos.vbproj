@@ -144,8 +144,9 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Eventos.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="FormDoctor.aspx" />
+    <Content Include="FormularioCitas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -229,17 +230,27 @@
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Eventos.aspx.designer.vb">
-      <DependentUpon>Eventos.aspx</DependentUpon>
+    <Compile Include="FormDoctor.aspx.designer.vb">
+      <DependentUpon>FormDoctor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Eventos.aspx.vb">
-      <DependentUpon>Eventos.aspx</DependentUpon>
+    <Compile Include="FormDoctor.aspx.vb">
+      <DependentUpon>FormDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="FormularioCitas.aspx.designer.vb">
+      <DependentUpon>FormularioCitas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioCitas.aspx.vb">
+      <DependentUpon>FormularioCitas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cita.vb" />
     <Compile Include="Models\DataBaseHelper.vb" />
+    <Compile Include="Models\Doctor.vb" />
+    <Compile Include="Models\Paciente.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

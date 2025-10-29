@@ -1,0 +1,114 @@
+﻿'------------------------------------------------------------------------------
+' <generado automáticamente>
+'     Este código fue generado por una herramienta.
+'
+'     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
+'     se vuelve a generar el código. 
+' </generado automáticamente>
+'------------------------------------------------------------------------------
+
+Option Strict On
+Option Explicit On
+
+
+Partial Public Class FormDoctor
+
+    '''<summary>
+    '''Control txt_nombre.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txt_nombre As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txt_apellido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txt_apellido As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txt_especialidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txt_especialidad As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txt_telefono.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txt_telefono As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txt_correo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txt_correo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control ddl_estado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddl_estado As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control btn_guardar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btn_guardar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btn_actualizar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btn_actualizar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btn_ir_citas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btn_ir_citas As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lbl_mensaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_mensaje As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control gvDoctores.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvDoctores As Global.System.Web.UI.WebControls.GridView
+End Class
