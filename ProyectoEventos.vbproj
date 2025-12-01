@@ -146,6 +146,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FormDoctor.aspx" />
+    <Content Include="FormPaciente.aspx" />
     <Content Include="FormularioCitas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -237,12 +238,19 @@
       <DependentUpon>FormDoctor.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="FormPaciente.aspx.designer.vb">
+      <DependentUpon>FormPaciente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormPaciente.aspx.vb">
+      <DependentUpon>FormPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="FormularioCitas.aspx.designer.vb">
       <DependentUpon>FormularioCitas.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioCitas.aspx.vb">
       <DependentUpon>FormularioCitas.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>

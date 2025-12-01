@@ -157,4 +157,93 @@ Public Class DatabaseHelper
         Return dt
     End Function
 
+    Public Function getPacientes() As DataTable
+        Dim query As String = "SELECT * FROM Paciente"
+        Dim dt As New DataTable()
+
+        Using conn As New SqlConnection(ConnectionString)
+            Using cmd As New SqlCommand(query, conn)
+                conn.Open()
+                dt.Load(cmd.ExecuteReader())
+            End Using
+        End Using
+
+        Return dt
+    End Function
+
+
+    Public Function insertPaciente(p As Paciente) As String
+        Dim query As String =
+        "INSERT INTO Paciente (IdPaciente, Nombre, Apellido, FechaNacimiento, Telefono, Correo, Direccion)
+         VALUES (@IdPaciente, @Nombre, @Apellido, @FechaNacimiento, @Telefono, @Correo, @Direccion)"
+
+        Using conn As New SqlConnection(ConnectionString)
+            Using cmd As New SqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@IdPaciente", p.IdPaciente)
+                cmd.Parameters.AddWithValue("@Nombre", p.Nombre)
+                cmd.Parameters.AddWithValue("@Apellido", p.Apellido)
+                cmd.Parameters.AddWithValue("@FechaNacimiento", p.FechaNacimiento)
+                cmd.Parameters.AddWithValue("@Telefono", p.Telefono)
+                cmd.Parameters.AddWithValue("@Correo", p.Correo)
+                cmd.Parameters.AddWithValue("@Direccion", p.Direccion)
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        Return "Paciente registrado correctamente."
+    End Function
+
+
+    Public Function updatePaciente(p As Paciente) As String
+        Dim query As String =
+        "UPDATE Paciente SET 
+            Nombre=@Nombre, 
+            Apellido=@Apellido, 
+            FechaNacimiento=@FechaNacimiento,
+            Telefono=@Telefono, 
+            Correo=@Correo, 
+            Direccion=@Direccion
+         WHERE IdPaciente=@IdPaciente"
+
+        Using conn As New SqlConnection(ConnectionString)
+            Using cmd As New SqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Nombre", p.Nombre)
+                cmd.Parameters.AddWithValue("@Apellido", p.Apellido)
+                cmd.Parameters.AddWithValue("@FechaNacimiento", p.FechaNacimiento)
+                cmd.Parameters.AddWithValue("@Telefono", p.Telefono)
+                cmd.Parameters.AddWithValue("@Correo", p.Correo)
+                cmd.Parameters.AddWithValue("@Direccion", p.Direccion)
+                cmd.Parameters.AddWithValue("@IdPaciente", p.IdPaciente)
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        Return "Paciente actualizado correctamente."
+    End Function
+
+
+    Public Function deletePaciente(idPaciente As String) As String
+        Dim query As String = "DELETE FROM Paciente WHERE IdPaciente=@IdPaciente"
+
+        Using conn As New SqlConnection(ConnectionString)
+            Using cmd As New SqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@IdPaciente", idPaciente)
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+
+        Return "Paciente eliminado correctamente."
+    End Function
+
+
+
+
+
+
 End Class

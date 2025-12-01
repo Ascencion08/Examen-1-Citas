@@ -11,70 +11,88 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class FormularioCitas
+Partial Public Class FormPaciente
 
     '''<summary>
-    '''Control editando.
+    '''Control lblMensaje.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents editando As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control ddl_doctor.
+    '''Control txtIdPaciente.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddl_doctor As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtIdPaciente As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ddl_paciente.
+    '''Control txtNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddl_paciente As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txt_fechaCita.
+    '''Control txtApellido.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txt_fechaCita As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtApellido As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txt_motivo.
+    '''Control txtFechaNacimiento.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txt_motivo As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtFechaNacimiento As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ddl_estado.
+    '''Control txtTelefono.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddl_estado As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents txtTelefono As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control btn_guardar.
+    '''Control txtCorreo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btn_guardar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtCorreo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtDireccion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtDireccion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control btnGuardar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnActualizar.
@@ -86,38 +104,29 @@ Partial Public Class FormularioCitas
     Protected WithEvents btnActualizar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btn_ir_doctores.
+    '''Control btnEliminar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btn_ir_doctores As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnEliminar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control lbl_mensaje.
+    '''Control btnLimpiar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lbl_mensaje As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnLimpiar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control gvCitas.
+    '''Control gridPacientes.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gvCitas As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
-    '''Control SqlDataSourceCitas.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceCitas As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents gridPacientes As Global.System.Web.UI.WebControls.GridView
 End Class
