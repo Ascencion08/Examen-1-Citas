@@ -145,8 +145,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="fmriniciosesion.aspx" />
     <Content Include="FormDoctor.aspx" />
+    <Content Include="FormLogin.aspx" />
     <Content Include="FormPaciente.aspx" />
     <Content Include="FormularioCitas.aspx" />
     <Content Include="Global.asax" />
@@ -232,18 +232,18 @@
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="fmriniciosesion.aspx.designer.vb">
-      <DependentUpon>fmriniciosesion.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="fmriniciosesion.aspx.vb">
-      <DependentUpon>fmriniciosesion.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="FormDoctor.aspx.designer.vb">
       <DependentUpon>FormDoctor.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormDoctor.aspx.vb">
       <DependentUpon>FormDoctor.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="FormLogin.aspx.designer.vb">
+      <DependentUpon>FormLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.aspx.vb">
+      <DependentUpon>FormLogin.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="FormPaciente.aspx.designer.vb">
