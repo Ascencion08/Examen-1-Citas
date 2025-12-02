@@ -145,7 +145,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="fmrLogin.aspx" />
+    <Content Include="fmriniciosesion.aspx" />
     <Content Include="FormDoctor.aspx" />
     <Content Include="FormPaciente.aspx" />
     <Content Include="FormularioCitas.aspx" />
@@ -232,11 +232,11 @@
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="fmrLogin.aspx.designer.vb">
-      <DependentUpon>fmrLogin.aspx</DependentUpon>
+    <Compile Include="fmriniciosesion.aspx.designer.vb">
+      <DependentUpon>fmriniciosesion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="fmrLogin.aspx.vb">
-      <DependentUpon>fmrLogin.aspx</DependentUpon>
+    <Compile Include="fmriniciosesion.aspx.vb">
+      <DependentUpon>fmriniciosesion.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="FormDoctor.aspx.designer.vb">
