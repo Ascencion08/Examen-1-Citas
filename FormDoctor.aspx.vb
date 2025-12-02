@@ -126,4 +126,8 @@ Public Class FormDoctor
         Response.Redirect("FormularioCitas.aspx")
     End Sub
 
+    Protected Sub btn_ir_pacientes_Click(sender As Object, e As EventArgs)
+        Response.Redirect("FormPaciente.aspx")
+    End Sub
+
 End Class

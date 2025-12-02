@@ -100,12 +100,10 @@ Public Class FormularioCitas
 
     Protected Sub gvCitas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvCitas.SelectedIndexChanged
         Dim row As GridViewRow = gvCitas.SelectedRow
-        Dim id As Integer = Convert.ToInt32(row.Cells(2).Text)
-
+        Dim id As Integer = Convert.ToInt32(gvCitas.DataKeys(row.RowIndex).Value)
         txt_fechaCita.Text = row.Cells(3).Text
         txt_motivo.Text = row.Cells(4).Text
         ddl_estado.SelectedValue = row.Cells(5).Text
-
         editando.Value = id
     End Sub
 
@@ -131,6 +129,10 @@ Public Class FormularioCitas
 
     Protected Sub btn_ir_doctores_Click(sender As Object, e As EventArgs)
         Response.Redirect("FormDoctor.aspx")
+    End Sub
+
+    Protected Sub btn_ir_pacientes_Click(sender As Object, e As EventArgs)
+        Response.Redirect("FormPaciente.aspx")
     End Sub
 
 End Class

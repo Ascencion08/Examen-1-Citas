@@ -51,6 +51,8 @@
                     <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-primary px-4 m-2" Text="Actualizar" />
                     <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger px-4 m-2" Text="Eliminar" />
                     <asp:Button ID="btnLimpiar" runat="server" CssClass="btn btn-secondary px-4 m-2" Text="Limpiar" />
+                    <asp:Button ID="btnIrDoctores" runat="server" CssClass="btn btn-info px-4 m-2" Text="Ir a Doctores" />   
+                    <asp:Button ID="btnIrCitas" runat="server" CssClass="btn btn-info px-4 m-2" Text="Ir a Citas" />
                 </div>
             </div>
         </div>

@@ -95,6 +95,15 @@ Partial Public Class FormularioCitas
     Protected WithEvents btn_ir_doctores As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control btnirpaciente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnirpaciente As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control lbl_mensaje.
     '''</summary>
     '''<remarks>

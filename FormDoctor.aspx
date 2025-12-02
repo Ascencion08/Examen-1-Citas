@@ -17,8 +17,8 @@
     <div class="mb-3">
         <asp:Button ID="btn_guardar" runat="server" Text="Guardar" CssClass="btn btn-success me-2" OnClick="btn_guardar_Click" />
         <asp:Button ID="btn_actualizar" runat="server" Text="Actualizar" CssClass="btn btn-primary" OnClick="btn_actualizar_Click" />
-        <asp:Button ID="btn_ir_citas" runat="server" Text="Ir a Citas"
-    CssClass="btn btn-info" OnClick="btn_ir_citas_Click" />
+        <asp:Button ID="btn_ir_citas" runat="server" Text="Ir a Citas" CssClass="btn btn-info" OnClick="btn_ir_citas_Click" />
+        <asp:Button ID="btn_ir_paciente" runat="server" Text="Ir a Pacientes" CssClass="btn btn-info" OnClick="btn_ir_pacientes_Click" />
 
     </div>
     <asp:Label ID="lbl_mensaje" runat="server" CssClass="text-info fw-bold"></asp:Label>

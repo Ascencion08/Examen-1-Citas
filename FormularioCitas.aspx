@@ -64,11 +64,15 @@
 
                 <asp:Button ID="btn_ir_doctores" runat="server" Text="Ir a Doctores"
                     CssClass="btn btn-info px-4" OnClick="btn_ir_doctores_Click" />
+                 <asp:Button ID="btnirpaciente" runat="server" Text="Ir a Pacientes" CssClass="btn btn-info" OnClick="btn_ir_pacientes_Click" />
             </div>
 
             <asp:Label ID="lbl_mensaje" runat="server"
                        CssClass="mt-3 d-block fw-bold text-primary"></asp:Label>
         </div>
+
+
+
 
         <!-- TABLA -->
         <div class="card shadow-sm p-3">

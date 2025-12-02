@@ -241,9 +241,37 @@ Public Class DatabaseHelper
         Return "Paciente eliminado correctamente."
     End Function
 
+    Public Function ValidarUsuario(nombreUsuario As String, contrasena As String) As UsuarioLogin
+        Dim usuarioEncontrado As UsuarioLogin = Nothing
 
+        Try
+            ' 
+            Dim query As String = "SELECT IdUsuario, NombreUsuario, Rol, NombreCompleto FROM UsuarioLogin WHERE NombreUsuario = @User AND Contrasena = @Pass"
 
+            Using conn As New SqlConnection(ConnectionString)
+                Using cmd As New SqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@User", nombreUsuario)
+                    cmd.Parameters.AddWithValue("@Pass", contrasena)
 
+                    conn.Open()
+                    Using reader As SqlDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            ' Si se encuentra el usuario, poblamos el objeto UsuarioLogin
+                            usuarioEncontrado = New UsuarioLogin()
+                            usuarioEncontrado.IdUsuario = reader.GetInt32(0)
+                            usuarioEncontrado.NombreUsuario = reader.GetString(1)
+                            usuarioEncontrado.Rol = reader.GetString(2)
+                            ' Manejamos el caso de que NombreCompleto sea DBNull
+                            usuarioEncontrado.NombreCompleto = If(reader.IsDBNull(3), "", reader.GetString(3))
+                        End If
+                    End Using
+                End Using
+            End Using
 
+        Catch ex As Exception
+            Throw New Exception("Error al validar credenciales en la DB: " & ex.Message)
+        End Try
 
+        Return usuarioEncontrado ' Retorna el objeto o Nothing si no se encontró
+    End Function
 End Class

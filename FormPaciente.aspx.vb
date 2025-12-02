@@ -98,5 +98,14 @@ Public Class FormPaciente
         gridPacientes.SelectedIndex = -1
     End Sub
 
+    Protected Sub btnIrCitas_Click(sender As Object, e As EventArgs) Handles btnIrCitas.Click
+        Response.Redirect("FormularioCitas.aspx")
+    End Sub
+
+    Protected Sub btnIrDoctores_Click(sender As Object, e As EventArgs) Handles btnIrDoctores.Click
+        Response.Redirect("FormDoctor.aspx")
+
+    End Sub
+
 
 End Class

@@ -122,6 +122,24 @@ Partial Public Class FormPaciente
     Protected WithEvents btnLimpiar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control btnIrDoctores.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnIrDoctores As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control btnIrCitas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnIrCitas As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control gridPacientes.
     '''</summary>
     '''<remarks>
