@@ -1,41 +1,42 @@
 ﻿Imports System.Data
+Imports System.Globalization
 
 Public Class FormularioCitas
     Inherits System.Web.UI.Page
 
     Dim dbhelper As New DatabaseHelper()
+    Dim Cita As New Cita()
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-
-        If Session("Rol") Is Nothing Then
-            Response.Redirect("FormLogin.aspx")
-            Exit Sub
-        End If
-
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             CargarDoctores()
             CargarPacientes()
             CargarCitas()
         End If
 
-        Dim rol As String = Session("Rol").ToString()
+        If Session("Rol") Is Nothing Then
+            Response.Redirect("FormLogin.aspx")
+            Exit Sub
+        End If
 
+        Dim rol As String = Session("Rol").ToString()
         If rol = "Usuario" Then
             btn_ir_doctores.Visible = False
             btnirpaciente.Visible = False
-
             ddl_paciente.Enabled = True
-            ddl_doctor.Enabled = True
-
             If Session("IdUsuario") IsNot Nothing Then
-                ddl_paciente.SelectedValue = Session("IdUsuario").ToString()
+                Dim val As String = Session("IdUsuario").ToString()
+                If ddl_paciente.Items.FindByValue(val) IsNot Nothing Then
+                    ddl_paciente.SelectedValue = val
+                End If
             End If
-
+            ddl_doctor.Enabled = True
         ElseIf rol = "Admin" Then
             btn_ir_doctores.Visible = True
             btnirpaciente.Visible = True
+            ddl_doctor.Enabled = True
+            ddl_paciente.Enabled = True
         End If
-
     End Sub
 
     Private Sub CargarDoctores()
@@ -58,81 +59,89 @@ Public Class FormularioCitas
         gvCitas.DataBind()
     End Sub
 
-    '----- GUARDAR -----
+    ' Guardar cita
     Protected Sub btn_guardar_Click(sender As Object, e As EventArgs) Handles btn_guardar.Click
         Try
+            If String.IsNullOrWhiteSpace(txt_fechaCita.Text) Then
+                lbl_mensaje.Text = "Debe ingresar una fecha válida."
+                Exit Sub
+            End If
+
             Dim cita As New Cita()
-            cita.IdDoctor = ddl_doctor.SelectedValue
-            cita.IdPaciente = ddl_paciente.SelectedValue
-            cita.FechaCita = Convert.ToDateTime(txt_fechaCita.Text)
+            cita.IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue)
+            cita.IdPaciente = Convert.ToInt32(ddl_paciente.SelectedValue)
+            cita.FechaCita = DateTime.Parse(txt_fechaCita.Text)
             cita.Motivo = txt_motivo.Text
             cita.Estado = ddl_estado.SelectedValue
 
             lbl_mensaje.Text = dbhelper.createCita(cita)
-            CargarCitas()
-
+            gvCitas.DataBind()
         Catch ex As Exception
             lbl_mensaje.Text = "Error al guardar la cita: " & ex.Message
         End Try
     End Sub
 
-    '----- ELIMINAR -----
+    ' Seleccionar cita
+    Protected Sub gvCitas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvCitas.SelectedIndexChanged
+        Dim row As GridViewRow = gvCitas.SelectedRow
+        Dim fecha As DateTime
+
+        If DateTime.TryParse(row.Cells(5).Text, fecha) Then
+            txt_fechaCita.Text = fecha.ToString("yyyy-MM-ddTHH:mm")
+        Else
+            txt_fechaCita.Text = ""
+        End If
+
+        txt_motivo.Text = row.Cells(6).Text
+        ddl_estado.SelectedValue = row.Cells(7).Text
+
+        If ddl_doctor.Items.FindByValue(row.Cells(2).Text) IsNot Nothing Then
+            ddl_doctor.SelectedValue = row.Cells(2).Text
+        End If
+        If ddl_paciente.Items.FindByValue(row.Cells(3).Text) IsNot Nothing Then
+            ddl_paciente.SelectedValue = row.Cells(3).Text
+        End If
+
+        editando.Value = row.Cells(1).Text
+    End Sub
+
+    ' Actualizar cita
+    Protected Sub btnActualizar_Click(sender As Object, e As EventArgs)
+        Try
+            If String.IsNullOrWhiteSpace(txt_fechaCita.Text) Then
+                lbl_mensaje.Text = "Debe ingresar una fecha válida."
+                Exit Sub
+            End If
+
+            Dim cita As New Cita() With {
+                .IdCita = Convert.ToInt32(editando.Value),
+                .IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue),
+                .IdPaciente = Convert.ToInt32(ddl_paciente.SelectedValue),
+                .FechaCita = DateTime.Parse(txt_fechaCita.Text),
+                .Motivo = txt_motivo.Text,
+                .Estado = ddl_estado.SelectedValue
+            }
+
+            dbhelper.updateCita(cita)
+            gvCitas.DataBind()
+            gvCitas.EditIndex = -1
+            lbl_mensaje.Text = "Cita actualizada correctamente."
+        Catch ex As Exception
+            lbl_mensaje.Text = "Error al actualizar la cita: " & ex.Message
+        End Try
+    End Sub
     Protected Sub gvCitas_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
             Dim id As Integer = Convert.ToInt32(gvCitas.DataKeys(e.RowIndex).Value)
             dbhelper.deleteCita(id)
-
             e.Cancel = True
-            CargarCitas()
-
+            gvCitas.DataBind()
             lbl_mensaje.Text = "Cita eliminada correctamente."
-
         Catch ex As Exception
             lbl_mensaje.Text = "Error al eliminar la cita: " & ex.Message
         End Try
     End Sub
 
-    '----- SELECCIONAR -----
-    Protected Sub gvCitas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvCitas.SelectedIndexChanged
-        Dim row As GridViewRow = gvCitas.SelectedRow
-
-        txt_fechaCita.Text = Convert.ToDateTime(row.Cells(5).Text).ToString("yyyy-MM-ddTHH:mm")
-        txt_motivo.Text = row.Cells(6).Text
-        ddl_estado.SelectedValue = row.Cells(7).Text
-
-        Dim idDoctor As String = row.Cells(3).Text
-        If ddl_doctor.Items.FindByValue(idDoctor) IsNot Nothing Then
-            ddl_doctor.SelectedValue = idDoctor
-        End If
-
-        Dim idPaciente As String = row.Cells(4).Text
-        If ddl_paciente.Items.FindByValue(idPaciente) IsNot Nothing Then
-            ddl_paciente.SelectedValue = idPaciente
-        End If
-
-        editando.Value = row.Cells(2).Text
-    End Sub
-
-    '----- ACTUALIZAR -----
-    Protected Sub btnActualizar_Click(sender As Object, e As EventArgs)
-        Try
-            Dim cita As New Cita()
-            cita.IdCita = Convert.ToInt32(editando.Value)
-            cita.IdDoctor = ddl_doctor.SelectedValue
-            cita.IdPaciente = ddl_paciente.SelectedValue
-            cita.FechaCita = Convert.ToDateTime(txt_fechaCita.Text)
-            cita.Motivo = txt_motivo.Text
-            cita.Estado = ddl_estado.SelectedValue
-
-            dbhelper.updateCita(cita)
-            CargarCitas()
-
-        Catch ex As Exception
-            lbl_mensaje.Text = "Error al actualizar la cita: " & ex.Message
-        End Try
-    End Sub
-
-    ' Navegación
     Protected Sub btn_ir_doctores_Click(sender As Object, e As EventArgs)
         Response.Redirect("FormDoctor.aspx")
     End Sub
@@ -140,5 +149,4 @@ Public Class FormularioCitas
     Protected Sub btn_ir_pacientes_Click(sender As Object, e As EventArgs)
         Response.Redirect("FormPaciente.aspx")
     End Sub
-
 End Class

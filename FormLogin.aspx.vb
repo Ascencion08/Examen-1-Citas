@@ -1,35 +1,37 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System
 
 Public Class FormLogin
     Inherits System.Web.UI.Page
 
-    Protected Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+    Dim dbhelper As New DatabaseHelper()
 
-        Dim helper As New DatabaseHelper()
-        Dim user As String = txtUser.Text.Trim()
-        Dim pass As String = txtPass.Text.Trim()
-
-        If user = "" Or pass = "" Then
-            lblError.Text = "Debe ingresar usuario y contraseña."
-            Exit Sub
-        End If
-
-        Dim usuario As UsuarioLogin = helper.ValidarUsuario(user, pass)
-
-        If usuario Is Nothing Then
-            lblError.Text = "Credenciales incorrectas."
-        Else
-            Session("Usuario") = usuario.NombreUsuario
-            Session("Rol") = usuario.Rol
-            Session("NombreCompleto") = usuario.NombreCompleto
-
-            Response.Redirect("FormPaciente.aspx")
-        End If
-
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
     End Sub
 
-    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
-        Response.Redirect("Registro.aspx")
+    Protected Sub btnLogin_Click(sender As Object, e As EventArgs)
+        Try
+            Dim usuario As String = txtUsuario.Text.Trim()
+            Dim contrasena As String = txtContrasena.Text.Trim()
+
+            Dim usuarioLogin As UsuarioLogin = dbhelper.ValidarUsuario(usuario, contrasena)
+
+            If usuarioLogin IsNot Nothing Then
+                Session("IdUsuario") = usuarioLogin.IdUsuario
+                Session("Usuario") = usuarioLogin.NombreUsuario
+                Session("Rol") = usuarioLogin.Rol
+                Session("NombreCompleto") = usuarioLogin.NombreCompleto
+                Response.Redirect("FormularioCitas.aspx")
+            Else
+                lblMensaje.Text = "Usuario o contraseña incorrectos."
+            End If
+
+        Catch ex As Exception
+            lblMensaje.Text = "Error al iniciar sesión: " & ex.Message
+        End Try
+    End Sub
+
+    Protected Sub btnRegistro_Click(sender As Object, e As EventArgs)
+        Response.Redirect("FormRegistro.aspx")
     End Sub
 
 End Class

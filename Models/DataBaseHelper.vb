@@ -1,9 +1,11 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
 Imports System.Configuration
 
 Public Class DatabaseHelper
     Private ReadOnly ConnectionString As String = ConfigurationManager.ConnectionStrings("II-46ConnectionString").ConnectionString
 
+    '=================== CITAS ===================
     Public Function createCita(cita As Cita) As String
         Try
             Dim sql As String = "INSERT INTO Cita (IdDoctor, IdPaciente, FechaCita, Motivo, Estado)
@@ -16,7 +18,6 @@ Public Class DatabaseHelper
                     command.Parameters.AddWithValue("@FechaCita", cita.FechaCita)
                     command.Parameters.AddWithValue("@Motivo", cita.Motivo)
                     command.Parameters.AddWithValue("@Estado", cita.Estado)
-
                     connection.Open()
                     command.ExecuteNonQuery()
                 End Using
@@ -24,7 +25,7 @@ Public Class DatabaseHelper
 
             Return "Cita registrada correctamente."
         Catch ex As Exception
-            Return " Error al registrar la cita: " & ex.Message
+            Return "Error al registrar la cita: " & ex.Message
         End Try
     End Function
 
@@ -46,15 +47,14 @@ Public Class DatabaseHelper
                     command.Parameters.AddWithValue("@FechaCita", cita.FechaCita)
                     command.Parameters.AddWithValue("@Motivo", cita.Motivo)
                     command.Parameters.AddWithValue("@Estado", cita.Estado)
-
                     connection.Open()
                     command.ExecuteNonQuery()
                 End Using
             End Using
 
-            Return "✅ Cita actualizada correctamente."
+            Return "Cita actualizada correctamente."
         Catch ex As Exception
-            Return "❌ Error al actualizar la cita: " & ex.Message
+            Return "Error al actualizar la cita: " & ex.Message
         End Try
     End Function
 
@@ -70,13 +70,13 @@ Public Class DatabaseHelper
                 End Using
             End Using
 
-            Return "🗑️ Cita eliminada correctamente."
+            Return "Cita eliminada correctamente."
         Catch ex As Exception
-            Return "❌ Error al eliminar la cita: " & ex.Message
+            Return "Error al eliminar la cita: " & ex.Message
         End Try
     End Function
 
-
+    '=================== DOCTORES ===================
     Public Function createDoctor(doctor As Doctor) As String
         Try
             Using conn As New SqlConnection(ConnectionString)
@@ -99,7 +99,6 @@ Public Class DatabaseHelper
         End Try
     End Function
 
-
     Public Function updateDoctor(doctor As Doctor) As String
         Try
             Using conn As New SqlConnection(ConnectionString)
@@ -121,11 +120,10 @@ Public Class DatabaseHelper
             End Using
             Return "Doctor actualizado correctamente."
         Catch ex As Exception
-            Return " Error al actualizar el doctor: " & ex.Message
+            Return "Error al actualizar el doctor: " & ex.Message
         End Try
     End Function
 
-    ' ELIMINAR DOCTOR
     Public Function deleteDoctor(idDoctor As Integer) As String
         Try
             Using conn As New SqlConnection(ConnectionString)
@@ -136,7 +134,7 @@ Public Class DatabaseHelper
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
-            Return " Doctor eliminado correctamente."
+            Return "Doctor eliminado correctamente."
         Catch ex As Exception
             Return "Error al eliminar el doctor: " & ex.Message
         End Try
@@ -157,26 +155,23 @@ Public Class DatabaseHelper
         Return dt
     End Function
 
+    '=================== PACIENTES ===================
     Public Function getPacientes() As DataTable
-        Dim query As String = "SELECT * FROM Paciente"
         Dim dt As New DataTable()
-
+        Dim query As String = "SELECT * FROM Paciente"
         Using conn As New SqlConnection(ConnectionString)
             Using cmd As New SqlCommand(query, conn)
                 conn.Open()
                 dt.Load(cmd.ExecuteReader())
             End Using
         End Using
-
         Return dt
     End Function
-
 
     Public Function insertPaciente(p As Paciente) As String
         Dim query As String =
         "INSERT INTO Paciente (IdPaciente, Nombre, Apellido, FechaNacimiento, Telefono, Correo, Direccion)
          VALUES (@IdPaciente, @Nombre, @Apellido, @FechaNacimiento, @Telefono, @Correo, @Direccion)"
-
         Using conn As New SqlConnection(ConnectionString)
             Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@IdPaciente", p.IdPaciente)
@@ -186,15 +181,12 @@ Public Class DatabaseHelper
                 cmd.Parameters.AddWithValue("@Telefono", p.Telefono)
                 cmd.Parameters.AddWithValue("@Correo", p.Correo)
                 cmd.Parameters.AddWithValue("@Direccion", p.Direccion)
-
                 conn.Open()
                 cmd.ExecuteNonQuery()
             End Using
         End Using
-
         Return "Paciente registrado correctamente."
     End Function
-
 
     Public Function updatePaciente(p As Paciente) As String
         Dim query As String =
@@ -206,7 +198,6 @@ Public Class DatabaseHelper
             Correo=@Correo, 
             Direccion=@Direccion
          WHERE IdPaciente=@IdPaciente"
-
         Using conn As New SqlConnection(ConnectionString)
             Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@Nombre", p.Nombre)
@@ -216,72 +207,59 @@ Public Class DatabaseHelper
                 cmd.Parameters.AddWithValue("@Correo", p.Correo)
                 cmd.Parameters.AddWithValue("@Direccion", p.Direccion)
                 cmd.Parameters.AddWithValue("@IdPaciente", p.IdPaciente)
-
                 conn.Open()
                 cmd.ExecuteNonQuery()
             End Using
         End Using
-
         Return "Paciente actualizado correctamente."
     End Function
 
-
     Public Function deletePaciente(idPaciente As String) As String
         Dim query As String = "DELETE FROM Paciente WHERE IdPaciente=@IdPaciente"
-
         Using conn As New SqlConnection(ConnectionString)
             Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@IdPaciente", idPaciente)
-
                 conn.Open()
                 cmd.ExecuteNonQuery()
             End Using
         End Using
-
         Return "Paciente eliminado correctamente."
     End Function
 
+    '=================== USUARIOS ===================
     Public Function ValidarUsuario(nombreUsuario As String, contrasena As String) As UsuarioLogin
         Dim usuarioEncontrado As UsuarioLogin = Nothing
-
         Try
             Dim query As String =
             "SELECT IdUsuario, NombreUsuario, Rol, NombreCompleto
              FROM UsuarioLogin
              WHERE NombreUsuario = @User AND Contrasena = @Pass"
-
             Using conn As New SqlConnection(ConnectionString)
                 Using cmd As New SqlCommand(query, conn)
                     cmd.Parameters.AddWithValue("@User", nombreUsuario)
                     cmd.Parameters.AddWithValue("@Pass", contrasena)
-
                     conn.Open()
-
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
                             usuarioEncontrado = New UsuarioLogin()
                             usuarioEncontrado.IdUsuario = reader.GetInt32(0)
                             usuarioEncontrado.NombreUsuario = reader.GetString(1)
                             usuarioEncontrado.Rol = reader.GetString(2)
-                            usuarioEncontrado.NombreCompleto =
-                            If(reader.IsDBNull(3), "", reader.GetString(3))
+                            usuarioEncontrado.NombreCompleto = If(reader.IsDBNull(3), "", reader.GetString(3))
                         End If
                     End Using
                 End Using
             End Using
-
         Catch ex As Exception
             Throw New Exception("Error al validar usuario: " & ex.Message)
         End Try
-
-        Return usuarioEncontrado   ' Devuelve Nothing si no encontró usuario
+        Return usuarioEncontrado
     End Function
 
     Public Function RegistrarUsuario(u As UsuarioLogin, contrasena As String) As String
         Dim query As String =
         "INSERT INTO UsuarioLogin (NombreUsuario, Contrasena, NombreCompleto, Rol)
          VALUES (@User, @Pass, @NombreCompleto, @Rol)"
-
         Try
             Using conn As New SqlConnection(ConnectionString)
                 Using cmd As New SqlCommand(query, conn)
@@ -289,17 +267,13 @@ Public Class DatabaseHelper
                     cmd.Parameters.AddWithValue("@Pass", contrasena)
                     cmd.Parameters.AddWithValue("@NombreCompleto", u.NombreCompleto)
                     cmd.Parameters.AddWithValue("@Rol", u.Rol)
-
                     conn.Open()
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
-
             Return "Usuario registrado correctamente."
-
         Catch ex As Exception
-            Return "Error al registrar: " & ex.Message
+            Return "Error al registrar usuario: " & ex.Message
         End Try
     End Function
-
 End Class

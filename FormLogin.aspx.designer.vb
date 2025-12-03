@@ -23,40 +23,22 @@ Partial Public Class FormLogin
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control Label1.
+    '''Control txtUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtUser.
+    '''Control txtContrasena.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtUser As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control Label2.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtPass.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtPass As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtContrasena As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control btnLogin.
@@ -68,20 +50,20 @@ Partial Public Class FormLogin
     Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control lblError.
+    '''Control btnRegistro.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnRegistro As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btnRegistrar.
+    '''Control lblMensaje.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnRegistrar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 End Class

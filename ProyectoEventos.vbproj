@@ -147,7 +147,9 @@
     <Content Include="favicon.ico" />
     <Content Include="FormDoctor.aspx" />
     <Content Include="FormLogin.aspx" />
+    <Content Include="FormLogout.aspx" />
     <Content Include="FormPaciente.aspx" />
+    <Content Include="FormRegistro.aspx" />
     <Content Include="FormularioCitas.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Registro.aspx" />
@@ -247,11 +249,25 @@
       <DependentUpon>FormLogin.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="FormLogout.aspx.designer.vb">
+      <DependentUpon>FormLogout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogout.aspx.vb">
+      <DependentUpon>FormLogout.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="FormPaciente.aspx.designer.vb">
       <DependentUpon>FormPaciente.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormPaciente.aspx.vb">
       <DependentUpon>FormPaciente.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="FormRegistro.aspx.designer.vb">
+      <DependentUpon>FormRegistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormRegistro.aspx.vb">
+      <DependentUpon>FormRegistro.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="FormularioCitas.aspx.designer.vb">

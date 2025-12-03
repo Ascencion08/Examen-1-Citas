@@ -11,50 +11,68 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Site
+Partial Public Class FormRegistro
 
     '''<summary>
-    '''Control TitleContent.
+    '''Control form1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TitleContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control HeadContent.
+    '''Control txtNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents HeadContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control lblUsuario.
+    '''Control txtUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control btnLogout.
+    '''Control txtContrasena.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnLogout As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtContrasena As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control MainContent.
+    '''Control ddlRol.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents ddlRol As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control btnRegistrar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnRegistrar As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lblMensaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 End Class

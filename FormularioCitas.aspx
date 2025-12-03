@@ -71,24 +71,29 @@
             <h4 class="mb-3 fw-bold">Listado de Citas</h4>
 
             <asp:GridView ID="gvCitas" runat="server" AutoGenerateColumns="False"
-              DataKeyNames="IdCita"
-              CssClass="table table-bordered table-striped"
-              OnSelectedIndexChanged="gvCitas_SelectedIndexChanged"
-              OnRowDeleting="gvCitas_RowDeleting">
+    DataSourceID="SqlDataSourceCitas"
+    DataKeyNames="IdCita"
+    CssClass="table table-bordered table-striped"
+    OnSelectedIndexChanged="gvCitas_SelectedIndexChanged"
+    OnRowDeleting="gvCitas_RowDeleting">
 
-                <Columns>
-                    <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
-                    <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" />
+    <Columns>
+        <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+        <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" />
+        <asp:BoundField DataField="IdCita" HeaderText="ID" ReadOnly="True" />
+        <asp:BoundField DataField="IdDoctor" HeaderText="Doctor" />
+        <asp:BoundField DataField="IdPaciente" HeaderText="Paciente" />
+        <asp:BoundField DataField="FechaCita" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd HH:mm}" />
+        <asp:BoundField DataField="Motivo" HeaderText="Motivo" />
+        <asp:BoundField DataField="Estado" HeaderText="Estado" />
+    </Columns>
+</asp:GridView>
 
-                    <asp:BoundField DataField="IdCita" HeaderText="ID" ReadOnly="True" />
-                    <asp:BoundField DataField="IdDoctor" HeaderText="Doctor" />
-                    <asp:BoundField DataField="IdPaciente" HeaderText="Paciente" />
-                    <asp:BoundField DataField="FechaCita" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd HH:mm}" />
-                    <asp:BoundField DataField="Motivo" HeaderText="Motivo" />
-                    <asp:BoundField DataField="Estado" HeaderText="Estado" />
-                </Columns>
+<asp:SqlDataSource ID="SqlDataSource1" runat="server"
+    ConnectionString="<%$ ConnectionStrings:II-46ConnectionString %>"
+    SelectCommand="SELECT * FROM Cita">
+</asp:SqlDataSource>
 
-            </asp:GridView>
         </div>
 
         <asp:SqlDataSource ID="SqlDataSourceCitas" runat="server"

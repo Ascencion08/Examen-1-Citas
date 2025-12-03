@@ -3,29 +3,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8" />
-    <title>Inicio de Sesión</title>
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-
 <body>
     <form id="form1" runat="server">
-        <div style="width:300px; margin:auto; padding-top:60px;">
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Iniciar Sesión</h2>
 
-            <h2>Inicio de Sesión</h2>
+            <div class="mb-3">
+                <label class="form-label">Usuario</label>
+                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
+            </div>
 
-            <asp:Label ID="Label1" runat="server" Text="Usuario:"></asp:Label><br />
-            <asp:TextBox ID="txtUser" runat="server"></asp:TextBox><br /><br />
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+            </div>
 
-            <asp:Label ID="Label2" runat="server" Text="Contraseña:"></asp:Label><br />
-            <asp:TextBox ID="txtPass" runat="server" TextMode="Password"></asp:TextBox><br /><br />
+            <div class="d-flex gap-2">
+                <asp:Button ID="btnLogin" runat="server" Text="Ingresar" CssClass="btn btn-primary" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnRegistro" runat="server" Text="Registrarse" CssClass="btn btn-secondary" OnClick="btnRegistro_Click" />
+            </div>
 
-            <asp:Button ID="btnLogin" runat="server" Text="Ingresar" OnClick="btnLogin_Click" /><br /><br />
-
-            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
-
-            <asp:Button ID="btnRegistrar" runat="server" Text="Crear cuenta nueva" />
-
-
+            <asp:Label ID="lblMensaje" runat="server" CssClass="mt-3 text-danger"></asp:Label>
         </div>
     </form>
 </body>
