@@ -19,12 +19,10 @@ Public Class FormLogin
         If usuario Is Nothing Then
             lblError.Text = "Credenciales incorrectas."
         Else
-            ' Guardamos la sesión del usuario
             Session("Usuario") = usuario.NombreUsuario
             Session("Rol") = usuario.Rol
             Session("NombreCompleto") = usuario.NombreCompleto
 
-            ' Redirigir a la página principal
             Response.Redirect("FormPaciente.aspx")
         End If
 
