@@ -9,23 +9,19 @@
 
         <asp:HiddenField ID="editando" runat="server" />
 
-        <!-- FORMULARIO -->
         <div class="card shadow-sm p-4 mb-4">
             <div class="row g-3">
 
-                <!-- Doctor -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Doctor</label>
                     <asp:DropDownList ID="ddl_doctor" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
 
-                <!-- Paciente -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Paciente</label>
                     <asp:DropDownList ID="ddl_paciente" runat="server" CssClass="form-select"></asp:DropDownList>
                 </div>
 
-                <!-- Fecha y hora -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Fecha y hora</label>
                     <asp:TextBox ID="txt_fechaCita" runat="server"
@@ -34,7 +30,6 @@
                         placeholder="Fecha y hora de la cita"></asp:TextBox>
                 </div>
 
-                <!-- Motivo -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Motivo</label>
                     <asp:TextBox ID="txt_motivo" runat="server"
@@ -42,7 +37,6 @@
                         placeholder="Motivo de la cita"></asp:TextBox>
                 </div>
 
-                <!-- Estado -->
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Estado</label>
                     <asp:DropDownList ID="ddl_estado" runat="server" CssClass="form-select">
@@ -54,7 +48,6 @@
 
             </div>
 
-            <!-- BOTONES -->
             <div class="mt-4 d-flex gap-2 flex-wrap">
                 <asp:Button ID="btn_guardar" runat="server" Text="Guardar"
                     CssClass="btn btn-success px-4" OnClick="btn_guardar_Click" />
@@ -64,50 +57,38 @@
 
                 <asp:Button ID="btn_ir_doctores" runat="server" Text="Ir a Doctores"
                     CssClass="btn btn-info px-4" OnClick="btn_ir_doctores_Click" />
-                 <asp:Button ID="btnirpaciente" runat="server" Text="Ir a Pacientes" CssClass="btn btn-info" OnClick="btn_ir_pacientes_Click" />
+
+                <asp:Button ID="btnirpaciente" runat="server" Text="Ir a Pacientes"
+                    CssClass="btn btn-info px-4" OnClick="btn_ir_pacientes_Click" />
             </div>
 
             <asp:Label ID="lbl_mensaje" runat="server"
                        CssClass="mt-3 d-block fw-bold text-primary"></asp:Label>
         </div>
 
-
-
-
         <!-- TABLA -->
         <div class="card shadow-sm p-3">
             <h4 class="mb-3 fw-bold">Listado de Citas</h4>
 
-            <asp:GridView ID="gvCitas" runat="server"
-                          CssClass="table table-striped table-bordered"
-                          HeaderStyle-CssClass="table-dark"
-                          AutoGenerateColumns="False"
-                          DataKeyNames="IdCita"
-                          DataSourceID="SqlDataSourceCitas"
-                          OnRowDeleting="gvCitas_RowDeleting"
-                          OnRowEditing="gvCitas_RowEditing"
-                          OnRowCancelingEdit="gvCitas_RowCancelingEdit"
-                          OnRowUpdating="gvCitas_RowUpdating"
-                          OnSelectedIndexChanged="gvCitas_SelectedIndexChanged">
+            <asp:GridView ID="gvCitas" runat="server" AutoGenerateColumns="False"
+              DataKeyNames="IdCita"
+              CssClass="table table-bordered table-striped"
+              OnSelectedIndexChanged="gvCitas_SelectedIndexChanged"
+              OnRowDeleting="gvCitas_RowDeleting">
 
                 <Columns>
-                    <asp:CommandField ShowSelectButton="True" />
-                    <asp:CommandField ShowEditButton="True" />
+                    <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                    <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" />
 
-                    <asp:BoundField DataField="IdCita" HeaderText="ID"
-                                    ReadOnly="True" Visible="false" />
-
+                    <asp:BoundField DataField="IdCita" HeaderText="ID" ReadOnly="True" />
                     <asp:BoundField DataField="IdDoctor" HeaderText="Doctor" />
                     <asp:BoundField DataField="IdPaciente" HeaderText="Paciente" />
-
-                    <asp:BoundField DataField="FechaCita" HeaderText="Fecha Cita"
-                                    DataFormatString="{0:dd/MM/yyyy HH:mm}" />
-
+                    <asp:BoundField DataField="FechaCita" HeaderText="Fecha" DataFormatString="{0:yyyy-MM-dd HH:mm}" />
                     <asp:BoundField DataField="Motivo" HeaderText="Motivo" />
                     <asp:BoundField DataField="Estado" HeaderText="Estado" />
                 </Columns>
-            </asp:GridView>
 
+            </asp:GridView>
         </div>
 
         <asp:SqlDataSource ID="SqlDataSourceCitas" runat="server"
@@ -118,8 +99,3 @@
     </div>
 
 </asp:Content>
-
-
-
-
-
