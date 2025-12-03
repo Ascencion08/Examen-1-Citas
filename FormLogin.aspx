@@ -23,6 +23,9 @@
 
             <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
 
+            <asp:Button ID="btnRegistrar" runat="server" Text="Crear cuenta nueva" />
+
+
         </div>
     </form>
 </body>

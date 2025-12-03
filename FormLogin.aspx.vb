@@ -1,33 +1,37 @@
-﻿Public Class FormLogin
-    Inherits System.Web.UI.Page
+﻿Imports System.Data.SqlClient
 
-    Private db As New DatabaseHelper()
+Public Class FormLogin
+    Inherits System.Web.UI.Page
 
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
 
-        Dim usuario As String = txtUser.Text.Trim()
+        Dim helper As New DatabaseHelper()
+        Dim user As String = txtUser.Text.Trim()
         Dim pass As String = txtPass.Text.Trim()
 
-        If usuario = "" Or pass = "" Then
+        If user = "" Or pass = "" Then
             lblError.Text = "Debe ingresar usuario y contraseña."
             Exit Sub
         End If
 
-        ' Llamamos al helper para validar
-        Dim usuarioValidado As UsuarioLogin = db.ValidarUsuario(usuario, pass)
+        Dim usuario As UsuarioLogin = helper.ValidarUsuario(user, pass)
 
-        If usuarioValidado IsNot Nothing Then
-
-            ' Guardar en sesión
-            Session("UsuarioActual") = usuarioValidado
-
-            ' Redirigir al inicio
-            Response.Redirect("Default.aspx")
-
+        If usuario Is Nothing Then
+            lblError.Text = "Credenciales incorrectas."
         Else
-            lblError.Text = "Usuario o contraseña incorrectos."
+            ' Guardamos la sesión del usuario
+            Session("Usuario") = usuario.NombreUsuario
+            Session("Rol") = usuario.Rol
+            Session("NombreCompleto") = usuario.NombreCompleto
+
+            ' Redirigir a la página principal
+            Response.Redirect("FormPaciente.aspx")
         End If
 
+    End Sub
+
+    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
+        Response.Redirect("Registro.aspx")
     End Sub
 
 End Class

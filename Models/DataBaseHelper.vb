@@ -277,5 +277,29 @@ Public Class DatabaseHelper
         Return usuarioEncontrado   ' Devuelve Nothing si no encontró usuario
     End Function
 
+    Public Function RegistrarUsuario(u As UsuarioLogin, contrasena As String) As String
+        Dim query As String =
+        "INSERT INTO UsuarioLogin (NombreUsuario, Contrasena, NombreCompleto, Rol)
+         VALUES (@User, @Pass, @NombreCompleto, @Rol)"
+
+        Try
+            Using conn As New SqlConnection(ConnectionString)
+                Using cmd As New SqlCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@User", u.NombreUsuario)
+                    cmd.Parameters.AddWithValue("@Pass", contrasena)
+                    cmd.Parameters.AddWithValue("@NombreCompleto", u.NombreCompleto)
+                    cmd.Parameters.AddWithValue("@Rol", u.Rol)
+
+                    conn.Open()
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            Return "Usuario registrado correctamente."
+
+        Catch ex As Exception
+            Return "Error al registrar: " & ex.Message
+        End Try
+    End Function
 
 End Class
