@@ -169,9 +169,10 @@ Public Class DatabaseHelper
     End Function
 
     Public Function insertPaciente(p As Paciente) As String
-        Dim query As String =
-        "INSERT INTO Paciente (IdPaciente, Nombre, Apellido, FechaNacimiento, Telefono, Correo, Direccion)
-         VALUES (@IdPaciente, @Nombre, @Apellido, @FechaNacimiento, @Telefono, @Correo, @Direccion)"
+        Dim query As String = "INSERT INTO Paciente
+    (Nombre, Apellido, FechaNacimiento, Telefono, Direccion, Correo)
+    VALUES
+    (@Nombre, @Apellido, @FechaNacimiento, @Telefono, @Direccion, @Correo)"
         Using conn As New SqlConnection(ConnectionString)
             Using cmd As New SqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@IdPaciente", p.IdPaciente)

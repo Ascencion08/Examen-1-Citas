@@ -12,14 +12,29 @@
         <div class="card shadow-sm p-4 mb-4">
             <div class="row g-3">
 
+                <%--Doctor--%>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Doctor</label>
                     <asp:DropDownList ID="ddl_doctor" runat="server" CssClass="form-select"></asp:DropDownList>
+
+                    <asp:RequiredFieldValidator ID="fvrDoctor" runat="server"
+                      Display="Dynamic"
+                      CssClass="alert alert-warning"
+                    ErrorMessage="Seleccione un doctor"
+                    ControlToValidate="ddl_doctor"></asp:RequiredFieldValidator>
+
                 </div>
 
+                <%--Paciente--%>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Paciente</label>
                     <asp:DropDownList ID="ddl_paciente" runat="server" CssClass="form-select"></asp:DropDownList>
+
+                    <asp:RequiredFieldValidator ID="fvrPaciente" runat="server"
+                      Display="Dynamic"
+                      CssClass="alert alert-warning"
+                    ErrorMessage="Ingrese nombre del paciente"
+                    ControlToValidate="ddl_paciente"></asp:RequiredFieldValidator>
                 </div>
 
                 <div class="col-md-6">
@@ -30,13 +45,21 @@
                         placeholder="Fecha y hora de la cita"></asp:TextBox>
                 </div>
 
+                <%--Motivo--%>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Motivo</label>
                     <asp:TextBox ID="txt_motivo" runat="server"
                         CssClass="form-control"
                         placeholder="Motivo de la cita"></asp:TextBox>
+
+                    <asp:RequiredFieldValidator ID="fvrMotivo" runat="server"
+                      Display="Dynamic"
+                      CssClass="alert alert-warning"
+                    ErrorMessage="Ingresa un motivo"
+                    ControlToValidate="txt_motivo"></asp:RequiredFieldValidator>
                 </div>
 
+                <%--Estado--%>
                 <div class="col-md-6">
                     <label class="form-label fw-bold">Estado</label>
                     <asp:DropDownList ID="ddl_estado" runat="server" CssClass="form-select">
@@ -44,6 +67,16 @@
                         <asp:ListItem Text="Completada" Value="Completada" />
                         <asp:ListItem Text="Cancelada" Value="Cancelada" />
                     </asp:DropDownList>
+
+                    <%--<asp:RequiredFieldValidator ID="fvrEstado" runat="server"
+                        Display="Dynamic"
+                        CssClass="alert alert-warning"
+                        ErrorMessage="Ingresa una Estado"
+                        ControlToValidate="ddl_estado"></asp:RequiredFieldValidator>--%>
+
+
+
+
                 </div>
 
             </div>
@@ -56,10 +89,10 @@
                     CssClass="btn btn-warning px-4" OnClick="btnActualizar_Click" />
 
                 <asp:Button ID="btn_ir_doctores" runat="server" Text="Ir a Doctores"
-                    CssClass="btn btn-info px-4" OnClick="btn_ir_doctores_Click" />
+                    CssClass="btn btn-info px-4" OnClick="btn_ir_doctores_Click" CausesValidation="false"/>
 
                 <asp:Button ID="btnirpaciente" runat="server" Text="Ir a Pacientes"
-                    CssClass="btn btn-info px-4" OnClick="btn_ir_pacientes_Click" />
+                    CssClass="btn btn-info px-4" OnClick="btn_ir_pacientes_Click" CausesValidation="false"/>
             </div>
 
             <asp:Label ID="lbl_mensaje" runat="server"
@@ -88,6 +121,11 @@
         <asp:BoundField DataField="Estado" HeaderText="Estado" />
     </Columns>
 </asp:GridView>
+
+             <asp:ValidationSummary ID="vsCitas" runat="server" ShowSummary="true"
+     CssClass="alert alet-warning"
+     HeaderText="Debe de completar lo siguiente:" />
+
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server"
     ConnectionString="<%$ ConnectionStrings:II-46ConnectionString %>"

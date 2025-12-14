@@ -14,18 +14,41 @@
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre Completo</label>
                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+
+
+                <asp:RequiredFieldValidator ID="fvrNombre" runat="server" 
+                    Display="Dynamic"
+                    CssClass="alert alert-warning"
+                    ErrorMessage="Nombre incompleto, debe de validar"
+                    ControlToValidate="txtNombre"></asp:RequiredFieldValidator>
             </div>
 
             <div class="mb-3">
                 <label for="txtUsuario" class="form-label">Usuario</label>
                 <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="fvrUsuario" runat="server" 
+                      Display="Dynamic"
+                      CssClass="alert alert-warning"
+                    ErrorMessage="Ingresa un Usuario"
+                 
+                    ControlToValidate="txtUsuario"></asp:RequiredFieldValidator>
             </div>
 
             <div class="mb-3">
                 <label for="txtContrasena" class="form-label">Contraseña</label>
                 <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+
+
+                <asp:RequiredFieldValidator ID="fvrContrasena" runat="server"
+                      Display="Dynamic"
+                      CssClass="alert alert-warning"
+                    ErrorMessage="Ingresa una contraseña"
+                    ControlToValidate="txtContrasena"></asp:RequiredFieldValidator>
+
             </div>
 
+          
             <div class="mb-3">
                 <label for="ddlRol" class="form-label">Rol</label>
                 <asp:DropDownList ID="ddlRol" runat="server" CssClass="form-select">
@@ -36,6 +59,10 @@
 
             <asp:Button ID="btnRegistrar" runat="server" Text="Registrarse" CssClass="btn btn-success" OnClick="btnRegistrar_Click" />
             <asp:Label ID="lblMensaje" runat="server" CssClass="mt-3 text-danger"></asp:Label>
+
+            <asp:ValidationSummary ID="vsPersona" runat="server" ShowSummary="true"
+                CssClass="alert alet-warning"
+                HeaderText="Corrija los siguientes errores:" />
 
             <div class="mt-3">
                 <a href="FormLogin.aspx">Volver al Login</a>

@@ -8,7 +8,7 @@
     <asp:TextBox ID="txt_especialidad" runat="server" placeholder="Especialidad" CssClass="form-control mb-2"></asp:TextBox>
     <asp:TextBox ID="txt_telefono" runat="server" placeholder="Teléfono" CssClass="form-control mb-2"></asp:TextBox>
     <asp:TextBox ID="txt_correo" runat="server" placeholder="Correo electrónico" CssClass="form-control mb-2"></asp:TextBox>
-
+    
     <asp:DropDownList ID="ddl_estado" runat="server" CssClass="form-control mb-2">
         <asp:ListItem Text="Activo" Value="True" />
         <asp:ListItem Text="Inactivo" Value="False" />

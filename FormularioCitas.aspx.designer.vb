@@ -32,6 +32,15 @@ Partial Public Class FormularioCitas
     Protected WithEvents ddl_doctor As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control fvrDoctor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents fvrDoctor As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Control ddl_paciente.
     '''</summary>
     '''<remarks>
@@ -39,6 +48,15 @@ Partial Public Class FormularioCitas
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ddl_paciente As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control fvrPaciente.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents fvrPaciente As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control txt_fechaCita.
@@ -57,6 +75,15 @@ Partial Public Class FormularioCitas
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txt_motivo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control fvrMotivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents fvrMotivo As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control ddl_estado.
@@ -120,6 +147,15 @@ Partial Public Class FormularioCitas
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvCitas As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control vsCitas.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents vsCitas As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
     '''Control SqlDataSource1.

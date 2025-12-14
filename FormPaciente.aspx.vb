@@ -17,15 +17,19 @@ Public Class FormPaciente
     End Sub
 
     Private Function CrearPaciente() As Paciente
-        Return New Paciente With {
-        .IdPaciente = txtIdPaciente.Text,
-        .Nombre = txtNombre.Text,
-        .Apellido = txtApellido.Text,
-        .FechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text),
-        .Telefono = txtTelefono.Text,
-        .Correo = txtCorreo.Text,
-        .Direccion = txtDireccion.Text
-    }
+        Dim p As New Paciente()
+        If Not String.IsNullOrWhiteSpace(txtIdPaciente.Text) Then
+            p.IdPaciente = Convert.ToInt32(txtIdPaciente.Text)
+        End If
+
+        p.Nombre = txtNombre.Text
+        p.Apellido = txtApellido.Text
+        p.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text)
+        p.Telefono = txtTelefono.Text
+        p.Correo = txtCorreo.Text
+        p.Direccion = txtDireccion.Text
+
+        Return p
     End Function
 
 

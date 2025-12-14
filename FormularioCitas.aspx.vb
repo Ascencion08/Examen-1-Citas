@@ -69,8 +69,12 @@ Public Class FormularioCitas
 
             Dim cita As New Cita()
             cita.IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue)
-            cita.IdPaciente = Convert.ToInt32(ddl_paciente.SelectedValue)
-            cita.FechaCita = DateTime.Parse(txt_fechaCita.Text)
+            cita.IdPaciente = ddl_paciente.SelectedValue
+            cita.FechaCita = DateTime.ParseExact(
+                txt_fechaCita.Text,
+                "yyyy-MM-ddTHH:mm",
+                CultureInfo.InvariantCulture
+            )
             cita.Motivo = txt_motivo.Text
             cita.Estado = ddl_estado.SelectedValue
 
@@ -102,30 +106,41 @@ Public Class FormularioCitas
             ddl_paciente.SelectedValue = row.Cells(3).Text
         End If
 
-        editando.Value = row.Cells(1).Text
+        editando.Value = gvCitas.DataKeys(row.RowIndex).Value.ToString()
+
     End Sub
 
     ' Actualizar cita
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs)
         Try
-            If String.IsNullOrWhiteSpace(txt_fechaCita.Text) Then
-                lbl_mensaje.Text = "Debe ingresar una fecha válida."
+            If String.IsNullOrWhiteSpace(editando.Value) Then
+                lbl_mensaje.Text = "Debe seleccionar una cita."
+                Exit Sub
+            End If
+
+            Dim fecha As DateTime
+            If Not DateTime.TryParse(
+            txt_fechaCita.Text,
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            fecha
+        ) Then
+                lbl_mensaje.Text = "Formato de fecha inválido."
                 Exit Sub
             End If
 
             Dim cita As New Cita() With {
-                .IdCita = Convert.ToInt32(editando.Value),
-                .IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue),
-                .IdPaciente = Convert.ToInt32(ddl_paciente.SelectedValue),
-                .FechaCita = DateTime.Parse(txt_fechaCita.Text),
-                .Motivo = txt_motivo.Text,
-                .Estado = ddl_estado.SelectedValue
-            }
+            .IdCita = Convert.ToInt32(editando.Value),
+            .IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue),
+            .IdPaciente = ddl_paciente.SelectedValue,
+            .FechaCita = fecha,
+            .Motivo = txt_motivo.Text,
+            .Estado = ddl_estado.SelectedValue
+        }
 
-            dbhelper.updateCita(cita)
+            lbl_mensaje.Text = dbhelper.updateCita(cita)
             gvCitas.DataBind()
-            gvCitas.EditIndex = -1
-            lbl_mensaje.Text = "Cita actualizada correctamente."
+
         Catch ex As Exception
             lbl_mensaje.Text = "Error al actualizar la cita: " & ex.Message
         End Try

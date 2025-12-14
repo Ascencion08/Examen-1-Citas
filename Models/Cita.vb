@@ -13,8 +13,8 @@
 
     Private _IdCita As Integer
     Private _IdDoctor As Integer
-    Private _IdPaciente As Integer
-    Private _FechaCita As Date
+    Private _IdPaciente As String
+    Private _FechaCita As DateTime
     Private _Motivo As String
     Private _Estado As String
 
