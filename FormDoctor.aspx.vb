@@ -1,6 +1,8 @@
 ﻿
 
 Imports System.Data.SqlClient
+Imports Utils
+
 
 Public Class FormDoctor
     Inherits System.Web.UI.Page
@@ -34,12 +36,12 @@ Public Class FormDoctor
            String.IsNullOrWhiteSpace(txt_telefono.Text) OrElse
            String.IsNullOrWhiteSpace(txt_correo.Text) Then
 
-                lbl_mensaje.Text = "Todos los campos son obligatorios."
+                SwalUtils.ShowSwal(Me, "Atención", "Todos los campos son obligatorios", "warning")
                 Exit Sub
             End If
 
             If Not System.Text.RegularExpressions.Regex.IsMatch(txt_telefono.Text, "^\d+$") Then
-                lbl_mensaje.Text = "El teléfono solo puede contener números."
+                SwalUtils.ShowSwalError(Me, "El teléfono solo puede contener números")
                 Exit Sub
             End If
 
@@ -50,14 +52,20 @@ Public Class FormDoctor
             doctor.Correo = txt_correo.Text
             doctor.Estado = Convert.ToBoolean(ddl_estado.SelectedValue)
 
-            lbl_mensaje.Text = dbhelper.createDoctor(doctor)
-            CargarDoctores()
+            Dim mensaje As String = dbhelper.createDoctor(doctor)
 
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Guardado", mensaje)
+                CargarDoctores()
+            End If
 
         Catch ex As Exception
-            lbl_mensaje.Text = "Error al guardar: " & ex.Message
+            SwalUtils.ShowSwalError(Me, ex.Message)
         End Try
     End Sub
+
 
     Protected Sub gvDoctores_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
@@ -89,22 +97,10 @@ Public Class FormDoctor
 
     Protected Sub btn_actualizar_Click(sender As Object, e As EventArgs)
         Try
-
-            If String.IsNullOrWhiteSpace(txt_nombre.Text) OrElse
-           String.IsNullOrWhiteSpace(txt_apellido.Text) OrElse
-           String.IsNullOrWhiteSpace(txt_especialidad.Text) OrElse
-           String.IsNullOrWhiteSpace(txt_telefono.Text) OrElse
-           String.IsNullOrWhiteSpace(txt_correo.Text) Then
-
-                lbl_mensaje.Text = "Todos los campos son obligatorios."
+            If ViewState("EditandoId") Is Nothing Then
+                SwalUtils.ShowSwal(Me, "Atención", "Debe seleccionar un doctor", "warning")
                 Exit Sub
             End If
-
-            If Not System.Text.RegularExpressions.Regex.IsMatch(txt_telefono.Text, "^\d+$") Then
-                lbl_mensaje.Text = "El teléfono solo puede contener números."
-                Exit Sub
-            End If
-
 
             doctor.IdDoctor = Convert.ToInt32(ViewState("EditandoId"))
             doctor.Nombre = txt_nombre.Text
@@ -114,13 +110,20 @@ Public Class FormDoctor
             doctor.Correo = txt_correo.Text
             doctor.Estado = Convert.ToBoolean(ddl_estado.SelectedValue)
 
-            dbhelper.updateDoctor(doctor)
-            lbl_mensaje.Text = "Doctor actualizado correctamente."
-            CargarDoctores()
+            Dim mensaje As String = dbhelper.updateDoctor(doctor)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Actualizado", mensaje)
+                CargarDoctores()
+            End If
+
         Catch ex As Exception
-            lbl_mensaje.Text = "Error al actualizar: " & ex.Message
+            SwalUtils.ShowSwalError(Me, ex.Message)
         End Try
     End Sub
+
 
     Protected Sub btn_ir_citas_Click(sender As Object, e As EventArgs)
         Response.Redirect("FormularioCitas.aspx")

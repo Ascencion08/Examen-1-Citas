@@ -1,4 +1,6 @@
 ﻿Imports ProyectoEventos
+Imports Utils
+Imports System.Globalization
 
 Public Class FormPaciente
     Inherits System.Web.UI.Page
@@ -18,13 +20,20 @@ Public Class FormPaciente
 
     Private Function CrearPaciente() As Paciente
         Dim p As New Paciente()
+
         If Not String.IsNullOrWhiteSpace(txtIdPaciente.Text) Then
             p.IdPaciente = Convert.ToInt32(txtIdPaciente.Text)
         End If
 
         p.Nombre = txtNombre.Text
         p.Apellido = txtApellido.Text
-        p.FechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text)
+
+        Dim fecha As DateTime
+        If Not DateTime.TryParse(txtFechaNacimiento.Text, fecha) Then
+            Throw New Exception("Formato de fecha inválido")
+        End If
+        p.FechaNacimiento = fecha
+
         p.Telefono = txtTelefono.Text
         p.Correo = txtCorreo.Text
         p.Direccion = txtDireccion.Text
@@ -32,45 +41,71 @@ Public Class FormPaciente
         Return p
     End Function
 
-
-
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Dim paciente = CrearPaciente()
-        lblMensaje.Text = db.insertPaciente(paciente)
-        CargarPacientes()
-    End Sub
-
-    Protected Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
         Try
-            Dim paciente As New Paciente()
+            Dim paciente = CrearPaciente()
+            Dim mensaje As String = db.insertPaciente(paciente)
 
-            paciente.IdPaciente = txtIdPaciente.Text   ' 
-            paciente.Nombre = txtNombre.Text
-            paciente.Apellido = txtApellido.Text
-            paciente.FechaNacimiento = Date.Parse(txtFechaNacimiento.Text)
-            paciente.Telefono = txtTelefono.Text
-            paciente.Correo = txtCorreo.Text
-            paciente.Direccion = txtDireccion.Text
-
-            Dim db As New DatabaseHelper()
-            db.updatePaciente(paciente)
-
-            lblMensaje.Text = "Paciente actualizado correctamente."
-            lblMensaje.CssClass = "text-success"
-
-            CargarPacientes()
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Guardado", mensaje)
+                CargarPacientes()
+                btnLimpiar_Click(Nothing, Nothing)
+            End If
 
         Catch ex As Exception
-            lblMensaje.Text = "Error: " & ex.Message
-            lblMensaje.CssClass = "text-danger"
+            SwalUtils.ShowSwalError(Me, ex.Message)
         End Try
     End Sub
 
 
+    Protected Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
+        Try
+            If String.IsNullOrWhiteSpace(txtIdPaciente.Text) Then
+                SwalUtils.ShowSwal(Me, "Atención", "Debe seleccionar un paciente", "warning")
+                Exit Sub
+            End If
+
+            Dim paciente = CrearPaciente()
+            Dim mensaje As String = db.updatePaciente(paciente)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Actualizado", mensaje)
+                CargarPacientes()
+                btnLimpiar_Click(Nothing, Nothing)
+            End If
+
+        Catch ex As Exception
+            SwalUtils.ShowSwalError(Me, ex.Message)
+        End Try
+    End Sub
+
+
+
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim id = Convert.ToInt32(gridPacientes.SelectedValue)
-        lblMensaje.Text = db.deletePaciente(id)
-        CargarPacientes()
+        Try
+            If gridPacientes.SelectedIndex = -1 Then
+                SwalUtils.ShowSwal(Me, "Atención", "Debe seleccionar un paciente", "warning")
+                Exit Sub
+            End If
+
+            Dim id As Integer = Convert.ToInt32(gridPacientes.SelectedValue)
+            Dim mensaje As String = db.deletePaciente(id)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Eliminado", mensaje)
+                CargarPacientes()
+                btnLimpiar_Click(Nothing, Nothing)
+            End If
+
+        Catch ex As Exception
+            SwalUtils.ShowSwalError(Me, ex.Message)
+        End Try
     End Sub
 
     Protected Sub gridPacientes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gridPacientes.SelectedIndexChanged

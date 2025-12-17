@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Globalization
+Imports Utils
 
 Public Class FormularioCitas
     Inherits System.Web.UI.Page
@@ -62,26 +63,25 @@ Public Class FormularioCitas
     ' Guardar cita
     Protected Sub btn_guardar_Click(sender As Object, e As EventArgs) Handles btn_guardar.Click
         Try
-            If String.IsNullOrWhiteSpace(txt_fechaCita.Text) Then
-                lbl_mensaje.Text = "Debe ingresar una fecha válida."
-                Exit Sub
+            Dim cita As New Cita() With {
+            .IdDoctor = ddl_doctor.SelectedValue,
+            .IdPaciente = ddl_paciente.SelectedValue,
+            .FechaCita = Date.Parse(txt_fechaCita.Text),
+            .Motivo = txt_motivo.Text,
+            .Estado = ddl_estado.SelectedValue
+        }
+
+            Dim mensaje = dbhelper.createCita(cita)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Éxito", mensaje)
+                gvCitas.DataBind()
             End If
 
-            Dim cita As New Cita()
-            cita.IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue)
-            cita.IdPaciente = ddl_paciente.SelectedValue
-            cita.FechaCita = DateTime.ParseExact(
-                txt_fechaCita.Text,
-                "yyyy-MM-ddTHH:mm",
-                CultureInfo.InvariantCulture
-            )
-            cita.Motivo = txt_motivo.Text
-            cita.Estado = ddl_estado.SelectedValue
-
-            lbl_mensaje.Text = dbhelper.createCita(cita)
-            gvCitas.DataBind()
         Catch ex As Exception
-            lbl_mensaje.Text = "Error al guardar la cita: " & ex.Message
+            SwalUtils.ShowSwalError(Me, ex.Message)
         End Try
     End Sub
 
@@ -113,36 +113,31 @@ Public Class FormularioCitas
     ' Actualizar cita
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs)
         Try
-            If String.IsNullOrWhiteSpace(editando.Value) Then
-                lbl_mensaje.Text = "Debe seleccionar una cita."
-                Exit Sub
-            End If
-
-            Dim fecha As DateTime
-            If Not DateTime.TryParse(
-            txt_fechaCita.Text,
-            CultureInfo.InvariantCulture,
-            DateTimeStyles.None,
-            fecha
-        ) Then
-                lbl_mensaje.Text = "Formato de fecha inválido."
+            If String.IsNullOrEmpty(editando.Value) Then
+                SwalUtils.ShowSwal(Me, "Atención", "Debe seleccionar una cita", "warning")
                 Exit Sub
             End If
 
             Dim cita As New Cita() With {
             .IdCita = Convert.ToInt32(editando.Value),
-            .IdDoctor = Convert.ToInt32(ddl_doctor.SelectedValue),
+            .IdDoctor = ddl_doctor.SelectedValue,
             .IdPaciente = ddl_paciente.SelectedValue,
-            .FechaCita = fecha,
+            .FechaCita = Date.Parse(txt_fechaCita.Text),
             .Motivo = txt_motivo.Text,
             .Estado = ddl_estado.SelectedValue
         }
 
-            lbl_mensaje.Text = dbhelper.updateCita(cita)
-            gvCitas.DataBind()
+            Dim mensaje = dbhelper.updateCita(cita)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Actualizado", mensaje)
+                gvCitas.DataBind()
+            End If
 
         Catch ex As Exception
-            lbl_mensaje.Text = "Error al actualizar la cita: " & ex.Message
+            SwalUtils.ShowSwalError(Me, ex.Message)
         End Try
     End Sub
     Protected Sub gvCitas_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)

@@ -8,6 +8,8 @@
         <h2 class="text-center mb-4">Gestión de Citas</h2>
 
         <asp:HiddenField ID="editando" runat="server" />
+        <asp:HiddenField ID="hfIdCita" runat="server" />
+
 
         <div class="card shadow-sm p-4 mb-4">
             <div class="row g-3">
@@ -140,5 +142,33 @@
         </asp:SqlDataSource>
 
     </div>
+
+    <script type="text/javascript">
+        function mostrarAlerta(tipo, titulo, mensaje) {
+            Swal.fire({
+                icon: tipo,  
+                title: titulo,
+                text: mensaje,
+                confirmButtonColor: '#3085d6'
+            });
+        }
+
+        function confirmarEliminar(callback) {
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: 'Esta acción no se puede deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    __doPostBack(callback, '');
+                }
+            });
+        }
+    </script>
 
 </asp:Content>
