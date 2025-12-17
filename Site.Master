@@ -16,20 +16,13 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="Default.aspx">MiSistema</a>
+                <a class="navbar-brand" href="Default.aspx">GESTION DE CITAS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="FormularioCitas.aspx">Citas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="FormDoctor.aspx">Doctores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="FormPaciente.aspx">Pacientes</a>
+                      
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -37,7 +30,7 @@
                             <asp:Label ID="lblUsuario" runat="server" CssClass="navbar-text text-light me-3"></asp:Label>
                         </li>
                         <li class="nav-item">
-                            <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-outline-light" Text="Cerrar sesión" OnClick="btnLogout_Click" />
+                            <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-outline-light" Text="Cerrar sesión" OnClick="btnLogout_Click " CausesValidation="false"/>
                         </li>
                     </ul>
                 </div>
