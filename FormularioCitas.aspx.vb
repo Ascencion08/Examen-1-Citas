@@ -142,15 +142,41 @@ Public Class FormularioCitas
     End Sub
     Protected Sub gvCitas_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
+            If Session("Rol") Is Nothing OrElse Session("Rol").ToString() <> "Admin" Then
+                SwalUtils.ShowSwal(Me, "Acceso denegado", "No tiene permisos para eliminar citas", "error")
+                e.Cancel = True
+                Exit Sub
+            End If
+
             Dim id As Integer = Convert.ToInt32(gvCitas.DataKeys(e.RowIndex).Value)
-            dbhelper.deleteCita(id)
+            Dim mensaje As String = dbhelper.deleteCita(id)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Eliminado", mensaje)
+                gvCitas.DataBind()
+            End If
+
             e.Cancel = True
-            gvCitas.DataBind()
-            lbl_mensaje.Text = "Cita eliminada correctamente."
+
         Catch ex As Exception
-            lbl_mensaje.Text = "Error al eliminar la cita: " & ex.Message
+            SwalUtils.ShowSwalError(Me, ex.Message)
+            e.Cancel = True
         End Try
     End Sub
+
+    Protected Sub gvCitas_RowDataBound(sender As Object, e As GridViewRowEventArgs)
+        If e.Row.RowType = DataControlRowType.DataRow Then
+
+            If Session("Rol") IsNot Nothing AndAlso Session("Rol").ToString() = "Usuario" Then
+
+                e.Row.Cells(1).Visible = False
+
+            End If
+        End If
+    End Sub
+
 
     Protected Sub btn_ir_doctores_Click(sender As Object, e As EventArgs)
         Response.Redirect("FormDoctor.aspx")

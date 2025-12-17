@@ -110,7 +110,8 @@
     DataKeyNames="IdCita"
     CssClass="table table-bordered table-striped"
     OnSelectedIndexChanged="gvCitas_SelectedIndexChanged"
-    OnRowDeleting="gvCitas_RowDeleting">
+    OnRowDeleting="gvCitas_RowDeleting"
+    OnRowDataBound="gvCitas_RowDataBound">
 
     <Columns>
         <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
